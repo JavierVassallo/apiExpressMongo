@@ -1,24 +1,38 @@
 const helpers = require("../helpers");
+const productosSchema = require("../models/productosSchema");
 
 let productosController = {};
 
+/* GET */
+
 productosController.getProductos = async () => {
-  let data = await helpers.dataAsincrona();
-  return { success: true, data };
+  return productosSchema.find();
 };
 
-productosController.postProductos = (producto) => {
-  if (producto.fabrica) {
-    return {
-      success: true,
-      data: "se creo el producto de la fabrica " + producto.fabrica,
-    };
-  } else {
-    return {
-      success: false,
-      data: "el producto no tenia fabrica, porfavor enviarla",
-    };
-  }
+productosController.getProducto = async (id) => {
+  return productosSchema.find({ codigo: parseInt(id) });
+};
+
+/* POST */
+
+productosController.postProductos = async (producto) => {
+  const Producto = productosSchema(producto);
+  return Producto.save();
+};
+
+/* PUT */
+
+productosController.putProducto = async (codigo, precio) => {
+  return productosSchema.findOneAndUpdate(
+    { codigo: codigo },
+    { precio: precio, nombre: "otra leche" }
+  );
+};
+
+/* DELETE */
+
+productosController.deleteProducto = async (nombre) => {
+  return productosSchema.deleteOne({ nombre: nombre });
 };
 
 module.exports = productosController;
