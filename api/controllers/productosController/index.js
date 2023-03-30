@@ -1,5 +1,4 @@
-const helpers = require("../helpers");
-const productosSchema = require("../models/productosSchema");
+const productosSchema = require("../../models/productosSchema");
 
 let productosController = {};
 

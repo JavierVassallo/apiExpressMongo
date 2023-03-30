@@ -1,5 +1,5 @@
 const express = require("express");
-const productosController = require("../controllers");
+const productosController = require("../../controllers/productosController");
 
 const router = express.Router();
 
@@ -16,7 +16,6 @@ router.get("/productos", async (req, res) => {
 
 router.get("/producto", async (req, res) => {
   const { query } = req;
-  console.log("query", query);
   try {
     let respuesta = await productosController.getProducto(query.codigo);
     res.json(respuesta);
