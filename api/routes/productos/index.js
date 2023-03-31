@@ -24,6 +24,16 @@ router.get("/producto", async (req, res) => {
   }
 });
 
+router.get("/productoFabrica", async (req, res) => {
+  const { query } = req;
+  try {
+    let respuesta = await productosController.getProductoFabrica(query.codigo);
+    res.json(respuesta);
+  } catch (e) {
+    res.json({ success: false, error: e.message });
+  }
+});
+
 /* POST  */
 
 router.post("/productos", async (req, res) => {

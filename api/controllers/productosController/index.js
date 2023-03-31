@@ -12,6 +12,10 @@ productosController.getProducto = async (id) => {
   return productosSchema.find({ codigo: parseInt(id) });
 };
 
+productosController.getProductoFabrica = async (id) => {
+  return productosSchema.find({ codigo: parseInt(id) });
+};
+
 /* POST */
 
 productosController.postProductos = async (producto) => {
