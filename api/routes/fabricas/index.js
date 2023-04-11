@@ -1,9 +1,11 @@
 const express = require("express");
 const fabricasController = require("../../controllers/fabricasControllers");
+const authenticateToken = require("../../middleware/jwtVerify");
 
 const router = express.Router();
 
-router.get("/fabricas", async (req, res) => {
+router.get("/fabricas", authenticateToken, async (req, res) => {
+  console.log("req", req.decoded);
   try {
     let respuesta = await fabricasController.getFabricas();
     res.json(respuesta);
