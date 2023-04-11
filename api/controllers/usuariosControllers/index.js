@@ -13,11 +13,9 @@ usuariosController.getUsuario = async (user) => {
 
 usuariosController.postUsuario = async (body) => {
   let newBody = { ...body };
-  console.log("pre cambio de pass", newBody);
   newBody.password = await hashPass(newBody.password);
-  console.log("despues cambio de pass", newBody);
-  const fabrica = usuariosSchema(newBody);
-  return fabrica.save();
+  const usuarioNuevo = usuariosSchema(newBody);
+  return usuarioNuevo.save();
 };
 
 usuariosController.login = async (user, password) => {
@@ -33,12 +31,6 @@ usuariosController.login = async (user, password) => {
   } else {
     return { succes: false, mensaje: "usuario inexistente" };
   }
-  /*let newBody = { ...body };
-    console.log("pre cambio de pass", newBody);
-    newBody.password = await hashPass(newBody.password);
-    console.log("despues cambio de pass", newBody);
-    const fabrica = usuariosSchema(newBody);
-    return fabrica.save();*/
 };
 
 module.exports = usuariosController;

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-let mongoUri = "mongodb://127.0.0.1:27017/test";
+let mongoUri =
+  "mongodb+srv://javiervassallo55:cagWginkF4KzIRli@cluster0.e1rtajk.mongodb.net/?retryWrites=true&w=majority";
 mongoose.set("strictQuery", true);
 mongoose
   .connect(mongoUri, {
