@@ -1,6 +1,8 @@
 const { hashPass, comparePasswaord } = require("../../helpers");
 const usuariosSchema = require("../../models/usuariosSchema");
-
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
 let usuariosController = {};
 
 /* GET */
@@ -24,7 +26,15 @@ usuariosController.login = async (user, password) => {
   if (usuarioBase) {
     let comparacion = await comparePasswaord(password, usuarioBase.password);
     if (comparacion) {
-      return { succes: true, mensaje: "usuario logueado correctamente" };
+      let usuario = {
+        nombre: usuarioBase.nombre,
+        username: usuarioBase.username,
+        rol: "Administrador",
+      };
+      let llave = process.env.SECRET_KEY;
+      let token = jwt.sign(usuario, llave, { expiresIn: "30s" });
+
+      return { succes: true, mensaje: "usuario logueado correctamente", token };
     } else {
       return { succes: false, mensaje: "passsword incorrecto" };
     }
