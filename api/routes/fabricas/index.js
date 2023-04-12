@@ -1,9 +1,12 @@
 const express = require("express");
 const fabricasController = require("../../controllers/fabricasControllers");
+const admin = require("../../middleware/jwtAdmin");
+const authenticateToken = require("../../middleware/jwtVerify");
 
 const router = express.Router();
 
-router.get("/fabricas", async (req, res) => {
+router.get("/fabricas", authenticateToken, async (req, res) => {
+  console.log("jwtDecodificado", req.jwtDecodificado);
   try {
     let respuesta = await fabricasController.getFabricas();
     res.json(respuesta);
@@ -22,7 +25,7 @@ router.get("/fabrica", async (req, res) => {
   }
 });
 
-router.post("/fabrica", async (req, res) => {
+router.post("/fabrica", admin, async (req, res) => {
   try {
     let respuesta = await fabricasController.postFabricas(req.body);
     res.json(respuesta);

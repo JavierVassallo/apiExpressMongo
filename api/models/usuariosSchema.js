@@ -11,6 +11,10 @@ const usuariosSchema = new Schema({
     required: true,
   },
   fechaCreacion: { type: Date, default: Date.now },
+  rol: {
+    type: String,
+    required: true,
+  },
   password: {
     type: String,
     required: true,

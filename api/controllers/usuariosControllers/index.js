@@ -29,7 +29,7 @@ usuariosController.login = async (user, password) => {
       let usuario = {
         nombre: usuarioBase.nombre,
         username: usuarioBase.username,
-        rol: "Administrador",
+        rol: usuarioBase.rol ? usuarioBase.rol : "vendedor",
       };
       let llave = process.env.SECRET_KEY;
       let token = jwt.sign(usuario, llave, { expiresIn: "30s" });

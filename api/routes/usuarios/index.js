@@ -27,6 +27,7 @@ router.post("/usuario", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  console.log("req.body", req.body);
   let { user, password } = req.body;
 
   try {
